@@ -143,6 +143,16 @@
           "top_p": 0.8
         }
       }
+    },
+    "zgsm": {
+      "client_class": "ZhugeShencodeClient",
+      "default_model": "deepseek-v3",
+      "models": {
+        "deepseek-v3": {
+          "temperature": 0.7,
+          "top_p": 0.8
+        }
+      }
     }
   }
 }

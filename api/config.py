@@ -11,6 +11,7 @@ from api.openai_client import OpenAIClient
 from api.openrouter_client import OpenRouterClient
 from api.bedrock_client import BedrockClient
 from adalflow import GoogleGenAIClient, OllamaClient
+from api.zhugeshencode_client import ZhugeShencodeClient
 
 # Get API keys from environment variables
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
@@ -20,6 +21,7 @@ AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_REGION = os.environ.get('AWS_REGION')
 AWS_ROLE_ARN = os.environ.get('AWS_ROLE_ARN')
+ZHUGESHENMA_API_KEY = os.environ.get('ZHUGESHENMA_API_KEY', '')
 
 # Set keys in environment (in case they're needed elsewhere in the code)
 if OPENAI_API_KEY:
@@ -51,7 +53,8 @@ CLIENT_CLASSES = {
     "OpenAIClient": OpenAIClient,
     "OpenRouterClient": OpenRouterClient,
     "OllamaClient": OllamaClient,
-    "BedrockClient": BedrockClient
+    "BedrockClient": BedrockClient,
+    "ZhugeShencodeClient": ZhugeShencodeClient
 }
 
 def replace_env_placeholders(config: Union[Dict[str, Any], List[Any], str, Any]) -> Union[Dict[str, Any], List[Any], str, Any]:
@@ -119,13 +122,14 @@ def load_generator_config():
             if provider_config.get("client_class") in CLIENT_CLASSES:
                 provider_config["model_client"] = CLIENT_CLASSES[provider_config["client_class"]]
             # Fall back to default mapping based on provider_id
-            elif provider_id in ["google", "openai", "openrouter", "ollama", "bedrock"]:
+            elif provider_id in ["google", "openai", "openrouter", "ollama", "bedrock", "zgsm"]:
                 default_map = {
                     "google": GoogleGenAIClient,
                     "openai": OpenAIClient,
                     "openrouter": OpenRouterClient,
                     "ollama": OllamaClient,
-                    "bedrock": BedrockClient
+                    "bedrock": BedrockClient,
+                    "zgsm": ZhugeShencodeClient
                 }
                 provider_config["model_client"] = default_map[provider_id]
             else:
