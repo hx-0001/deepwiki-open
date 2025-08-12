@@ -1,6 +1,51 @@
 {
-  "default_provider": "google",
+  "default_provider": "sangfor",
   "providers": {
+    "sangfor": {
+      "client_class": "OpenAIClient",
+      "api_base": "https://shenma.sangfor.com.cn/chat-rag/api/v1",
+      "api_key": "${SANGFOR_API_KEY}",
+      "default_model": "glm45",
+      "supportsCustomModel": true,
+      "models": {
+        "kimi-k2": {
+          "temperature": 0.7,
+          "top_p": 0.8
+        },
+        "deepseek-r1": {
+          "temperature": 0.7,
+          "top_p": 0.8
+        },
+        "qwen3-235b-a22b-instruct-2507": {
+          "temperature": 0.7,
+          "top_p": 0.8
+        },
+        "qwen3-235b-a22b": {
+          "temperature": 0.7,
+          "top_p": 0.8
+        },
+        "qwen25-vl-32b": {
+          "temperature": 0.7,
+          "top_p": 0.8
+        },
+        "qwen3-32b": {
+          "temperature": 0.7,
+          "top_p": 0.8
+        },
+        "qwq-32b": {
+          "temperature": 0.7,
+          "top_p": 0.8
+        },
+        "glm45-fp8": {
+          "temperature": 0.7,
+          "top_p": 0.8
+        },
+        "glm45": {
+          "temperature": 0.7,
+          "top_p": 0.8
+        }
+      }
+    },
     "dashscope": {
       "default_model": "qwen-plus",
       "supportsCustomModel": true,
